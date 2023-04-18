@@ -49,3 +49,10 @@ def test_subtracting_two_vectors():
 
     assert result == (-2, -4, -6, 0)
 
+def test_subtracting_point_from_a_vector():
+    p = point(3, 2, 1)
+    v = vector(5, 6, 7)
+
+    with pytest.raises(ValueError):
+        result = sub(v, p)
+
