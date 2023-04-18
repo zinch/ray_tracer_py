@@ -41,3 +41,11 @@ def test_subtracting_vector_from_point():
 
     assert result == (-2, -4, -6, 1)
 
+def test_subtracting_two_vectors():
+    v1 = vector(3, 2, 1)
+    v2 = vector(5, 6, 7)
+
+    result = sub(v1, v2)
+
+    assert result == (-2, -4, -6, 0)
+
