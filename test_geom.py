@@ -25,3 +25,11 @@ def test_adding_two_points():
     with pytest.raises(ValueError):
         result = add(p1, p2)
 
+def test_subtracting_two_points():
+    p1 = point(3, 2, 1)
+    p2 = point(5, 6, 7)
+
+    result = sub(p1, p2)
+
+    assert result == (-2, -4, -6, 0)
+
