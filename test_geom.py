@@ -18,3 +18,10 @@ def test_adding_two_tuples():
 
     assert result == (1, 1, 6, 1)
 
+def test_adding_two_points():
+    p1 = point(3, -2, 5)
+    p2 = point(-2, 3, 1)
+
+    with pytest.raises(ValueError):
+        result = add(p1, p2)
+
