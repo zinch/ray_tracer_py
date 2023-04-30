@@ -1,6 +1,6 @@
 import pytest
 
-from math_util import equal
+from core.math_util import equal
 
 def test_unequal_floating_point_numbers():
     x = 1.00001

@@ -1,5 +1,5 @@
 import math
-from math_util import equal
+from core.math_util import equal
 
 class Tuple():
     def __init__(self, x, y, z, w):

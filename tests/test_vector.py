@@ -1,7 +1,7 @@
 import pytest
 
-from geom import *
-from math_util import equal
+from core.geom import *
+from core.math_util import equal
 
 def test_negating_vector():
     assert -Vector(1, -2, 3) == Vector(-1, 2, -3)

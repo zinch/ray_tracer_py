@@ -1,6 +1,6 @@
 import pytest
 
-from geom import *
+from core.geom import *
 
 def test_point_creation():
     p = Point(4, -4, 3)
