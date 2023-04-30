@@ -1,4 +1,5 @@
 import math
+from math_util import equal
 
 class Tuple():
     def __init__(self, x, y, z, w):
@@ -46,6 +47,17 @@ class Tuple():
         else:
             return Point(x1 - x2, y1 - y2, z1 - z2)
 
+    def __eq__(self, other):
+        print('boom')
+        if not isinstance(other, Tuple):
+            raise ValueError('Can compare only tuples')
+        x1, y1, z1, w1 = self.values
+        x2, y2, z2, w2 = other.values
+        return (equal(x1, x2) and
+            equal(y1, y2) and
+            equal(z1, z2) and
+            equal(w1, w2))
+
 
 class Point(Tuple):
     def __init__(self, x, y, z):
@@ -68,4 +80,9 @@ class Vector(Tuple):
     def magnitude(self):
         x, y, z, _ = self.values
         return math.sqrt(x ** 2 + y ** 2 + z ** 2)
+
+    def normalize(self):
+        m = self.magnitude()
+        x, y, z, _ = self.values
+        return Vector(x / m, y / m, z / m)
 

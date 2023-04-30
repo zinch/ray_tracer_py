@@ -89,3 +89,12 @@ def test_multiplying_vector_by_fraction():
         ])
 def test_magnitude(vector, expected_magnitude):
     assert equal(vector.magnitude(), expected_magnitude)
+
+@pytest.mark.parametrize('vector, normalized_vector',
+        [
+            (Vector(4, 0, 0), Vector(1, 0, 0)),
+            (Vector(1, 2, 3), Vector(0.26726, 0.53452, 0.80178))
+        ])
+def test_magnitude(vector, normalized_vector):
+    assert vector.normalize() == normalized_vector
+    assert vector.normalize().magnitude() == 1
