@@ -9,14 +9,17 @@ class Tuple():
         return self.values[3] == 0
 
     def __neg__(self):
-         raise ValueError("Cannot negate point")
+         raise ValueError('Cannot negate point')
 
     def __mul__(self):
-         raise ValueError("Cannot negate point")
+         raise ValueError('Cannot negate point')
 
     def __add__(self, other):
+        if not isinstance(other, Tuple):
+            raise ValueError('Can add only tuples')
+
         if self.is_point() and other.is_point():
-            raise ValueError("Cannot add points")
+            raise ValueError('Cannot add points')
 
         x1, y1, z1, w1 = self.values
         x2, y2, z2, w2 = other.values
@@ -27,8 +30,11 @@ class Tuple():
             return Point(x1 + x2, y1 + y2, z1 + z2)
 
     def __sub__(self, other):
+        if not isinstance(other, Tuple):
+            raise ValueError('Can subtract only tuples')
+
         if self.is_vector() and other.is_point():
-            raise ValueError("Cannot subtract point from a vector")
+            raise ValueError('Cannot subtract point from a vector')
         x1, y1, z1, w1 = self.values
         x2, y2, z2, w2 = other.values
 
