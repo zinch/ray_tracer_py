@@ -1,6 +1,7 @@
 import pytest
 
 from geom import *
+from math_util import equal
 
 def test_point_creation():
     p = Point(4, -4, 3)
@@ -78,4 +79,13 @@ def test_multiplying_vector_by_fraction():
 
     assert result.values == (0.5, -1, 1.5, 0)
 
-
+@pytest.mark.parametrize('vector, expected_magnitude',
+        [
+            (Vector(1, 0, 0), 1),
+            (Vector(0, 1, 0), 1),
+            (Vector(0, 0, 1), 1),
+            (Vector(1, 2, 3), 3.74165),
+            (Vector(-1, -2, -3), 3.74165)
+        ])
+def test_magnitude(vector, expected_magnitude):
+    assert equal(vector.magnitude(), expected_magnitude)

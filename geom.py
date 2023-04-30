@@ -1,3 +1,5 @@
+import math
+
 class Tuple():
     def __init__(self, x, y, z, w):
         self.values = (x, y, z, w)
@@ -63,5 +65,7 @@ class Vector(Tuple):
             x, y, z, _ = self.values
             return Vector(x * other, y * other, z * other)
 
-
+    def magnitude(self):
+        x, y, z, _ = self.values
+        return math.sqrt(x ** 2 + y ** 2 + z ** 2)
 
