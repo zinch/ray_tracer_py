@@ -51,3 +51,11 @@ def test_dot_product():
     dot_product = a * b
 
     assert dot_product == 20
+
+def test_cross_product():
+    a = Vector(1, 2, 3)
+    b = Vector(2, 3, 4)
+
+    assert a.cross(b) == Vector(-1, 2, -1)
+    assert b.cross(a) == Vector(1, -2, 1)
+

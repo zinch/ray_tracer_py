@@ -92,3 +92,15 @@ class Vector(Tuple):
         x, y, z, _ = self.values
         return Vector(x / m, y / m, z / m)
 
+    def cross(self, other):
+        if isinstance(other, Vector):
+            x1, y1, z1, _ = self.values
+            x2, y2, z2, _ = other.values
+
+            x = y1 * z2 - z1 * y2
+            y = z1 * x2 - x1 * z2
+            z = x1 * y2 - y1 * x2
+            return Vector(x, y, z)
+        else:
+            raise ValueError(f'Cannot multiply by {other}')
+
