@@ -3,56 +3,57 @@ import pytest
 from geom import *
 
 def test_point_creation():
-    p = point(4, -4, 3)
-    assert p == (4, -4, 3, 1)
+    p = Point(4, -4, 3)
+    assert p.values == (4, -4, 3, 1)
 
 def test_vector_creation():
-    v = vector(4, -4, 3)
-    assert v == (4, -4, 3, 0)
+    v = Vector(4, -4, 3)
+    assert v.values == (4, -4, 3, 0)
 
 def test_adding_two_tuples():
-    p = point(3, -2, 5)
-    v = vector(-2, 3, 1)
+    p = Point(3, -2, 5)
+    v = Vector(-2, 3, 1)
 
-    result = add(p, v)
+    result = p + v
 
-    assert result == (1, 1, 6, 1)
+    assert result.values == (1, 1, 6, 1)
+    assert result.is_point()
 
 def test_adding_two_points():
-    p1 = point(3, -2, 5)
-    p2 = point(-2, 3, 1)
+    p1 = Point(3, -2, 5)
+    p2 = Point(-2, 3, 1)
 
     with pytest.raises(ValueError):
-        result = add(p1, p2)
+        result = p1 + p2
 
 def test_subtracting_two_points():
-    p1 = point(3, 2, 1)
-    p2 = point(5, 6, 7)
+    p1 = Point(3, 2, 1)
+    p2 = Point(5, 6, 7)
 
-    result = sub(p1, p2)
+    result = p1 - p2
 
-    assert result == (-2, -4, -6, 0)
+    assert result.values == (-2, -4, -6, 0)
 
 def test_subtracting_vector_from_point():
-    p = point(3, 2, 1)
-    v = vector(5, 6, 7)
+    p = Point(3, 2, 1)
+    v = Vector(5, 6, 7)
 
-    result = sub(p, v)
+    result = p - v
 
-    assert result == (-2, -4, -6, 1)
+    assert result.values == (-2, -4, -6, 1)
 
 def test_subtracting_two_vectors():
-    v1 = vector(3, 2, 1)
-    v2 = vector(5, 6, 7)
+    v1 = Vector(3, 2, 1)
+    v2 = Vector(5, 6, 7)
 
-    result = sub(v1, v2)
+    result = v1 - v2
 
-    assert result == (-2, -4, -6, 0)
+    assert result.values == (-2, -4, -6, 0)
 
 def test_subtracting_point_from_a_vector():
-    p = point(3, 2, 1)
-    v = vector(5, 6, 7)
+    p = Point(3, 2, 1)
+    v = Vector(5, 6, 7)
 
     with pytest.raises(ValueError):
-        result = sub(v, p)
+        result = v - p
 
