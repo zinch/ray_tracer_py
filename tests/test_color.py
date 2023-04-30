@@ -3,9 +3,9 @@ from core.color import Color
 def test_color_components():
     c = Color(0.5, 0.4, 0.7)
 
-    assert c.red == 0.5
-    assert c.green == 0.4
-    assert c.blue == 0.7
+    assert c.red() == 0.5
+    assert c.green() == 0.4
+    assert c.blue() == 0.7
 
 def test_adding_colors():
     c1 = Color(0.9, 0.6, 0.75)
@@ -28,3 +28,4 @@ def test_multiplying_colors():
     c2 = Color(0.9, 1, 0.1)
 
     assert c1 * c2 == Color(0.9, 0.2, 0.04)
+

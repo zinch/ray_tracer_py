@@ -1,107 +1,92 @@
 import math
+from core.tuple import Tuple
 from core.math_util import equal
 
-class Tuple:
+class Base:
     def __init__(self, x, y, z, w):
-        self.values = (x, y, z, w)
+        self.t = Tuple(x, y, z, w)
+
+    def __str__(self):
+        return str(self.t)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __eq__(self, other):
+        if not isinstance(other, Base):
+            raise ValueError('Can compare only tuples')
+
+        return self.t == other.t
 
     def is_point(self):
-        return self.values[3] == 1
+        return self.t[3] == 1
 
     def is_vector(self):
-        return self.values[3] == 0
-
-    def __neg__(self):
-         raise ValueError('Cannot negate tuple')
-
-    def __mul__(self):
-         raise ValueError('Cannot multiply tuple')
+        return self.t[3] == 0
 
     def __add__(self, other):
-        if not isinstance(other, Tuple):
+        if not isinstance(other, Base):
             raise ValueError('Can add only tuples')
 
         if self.is_point() and other.is_point():
             raise ValueError('Cannot add points')
 
-        x1, y1, z1, w1 = self.values
-        x2, y2, z2, w2 = other.values
-        w = w1 + w2
+        x, y, z, w = self.t + other.t
         if w == 0:
-            return Vector(x1 + x2, y1 + y2, z1 + z2)
+            return Vector(x, y, z)
         else:
-            return Point(x1 + x2, y1 + y2, z1 + z2)
+            return Point(x, y, z)
 
     def __sub__(self, other):
-        if not isinstance(other, Tuple):
+        if not isinstance(other, Base):
             raise ValueError('Can subtract only tuples')
 
         if self.is_vector() and other.is_point():
             raise ValueError('Cannot subtract point from a vector')
-        x1, y1, z1, w1 = self.values
-        x2, y2, z2, w2 = other.values
 
-        w = w1 - w2
+        x, y, z, w = self.t - other.t
         if w == 0:
-            return Vector(x1 - x2, y1 - y2, z1 - z2)
+            return Vector(x, y, z)
         else:
-            return Point(x1 - x2, y1 - y2, z1 - z2)
-
-    def __eq__(self, other):
-        if not isinstance(other, Tuple):
-            raise ValueError('Can compare only tuples')
-
-        x1, y1, z1, w1 = self.values
-        x2, y2, z2, w2 = other.values
-        return (equal(x1, x2) and
-            equal(y1, y2) and
-            equal(z1, z2) and
-            equal(w1, w2))
-
-    def __str__(self):
-        return str(self.values)
-
-    def __repr__(self):
-        return self.__str__()
+            return Point(x, y, z)
 
 
-class Point(Tuple):
+class Point(Base):
     def __init__(self, x, y, z):
         super().__init__(x, y, z, 1)
 
-
-class Vector(Tuple):
+class Vector(Base):
     def __init__(self, x, y, z):
         super().__init__(x, y, z, 0)
 
     def __neg__(self):
-        x, y, z, _ = self.values
-        return Vector(-x, -y, -z)
+        x, y, z, _ = -self.t
+        return Vector(x, y, z)
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
-            x, y, z, _ = self.values
-            return Vector(x * other, y * other, z * other)
+            x, y, z, _ = self.t * other
+            return Vector(x, y, z)
         elif isinstance(other, Vector):
-            x1, y1, z1, _ = self.values
-            x2, y2, z2, _ = other.values
+            x1, y1, z1, _ = self.t.values
+            x2, y2, z2, _ = other.t.values
             return x1 * x2 + y1 * y2 + z1 * z2
         else:
             raise ValueError(f'Cannot multiply by {other}')
 
     def magnitude(self):
-        x, y, z, _ = self.values
+        x, y, z, _ = self.t.values
         return math.sqrt(x ** 2 + y ** 2 + z ** 2)
 
     def normalize(self):
         m = self.magnitude()
-        x, y, z, _ = self.values
+        x, y, z, _ = self.t.values
         return Vector(x / m, y / m, z / m)
 
     def cross(self, other):
         if isinstance(other, Vector):
-            x1, y1, z1, _ = self.values
-            x2, y2, z2, _ = other.values
+            x1, y1, z1, _ = self.t.values
+            x2, y2, z2, _ = other.t.values
 
             x = y1 * z2 - z1 * y2
             y = z1 * x2 - x1 * z2

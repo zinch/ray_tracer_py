@@ -1,14 +1,20 @@
-from core.geom import Tuple
-from core.math_util import equal
+from core.tuple import Tuple
 
-class Color():
+class Color:
     def __init__(self, r, g, b):
-        self.red = r
-        self.green = g
-        self.blue = b
+        self.t = Tuple(r, g, b)
+
+    def red(self):
+        return self.t[0]
+
+    def green(self):
+        return self.t[1]
+
+    def blue(self):
+        return self.t[2]
 
     def __str__(self):
-        return f'RGB({self.red}, {self.green}, {self.blue})'
+        return f'RGB({self.red()}, {self.green()}, {self.blue()})'
 
     def __repr__(self):
         return self.__str__()
@@ -17,29 +23,30 @@ class Color():
         if not isinstance(other, Color):
             raise ValueError('Can add only colors')
 
-        return Color(self.red + other.red, self.green + other.green, self.blue + other.blue)
+        r, g, b, _ = self.t + other.t
+        return Color(r, g, b)
 
     def __sub__(self, other):
         if not isinstance(other, Color):
             raise ValueError('Can subtract only colors')
 
-        return Color(self.red - other.red, self.green - other.green, self.blue - other.blue)
+        r, g, b, _ = self.t - other.t
+        return Color(r, g, b)
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
-            return Color(self.red * other, self.green * other, self.blue * other)
+            r, g, b, _ = self.t * other
+            return Color(r, g, b)
         elif isinstance(other, Color):
-            r = self.red * other.red
-            g = self.green * other.green
-            b = self.blue * other.blue
+            r = self.red() * other.red()
+            g = self.green() * other.green()
+            b = self.blue() * other.blue()
             return Color(r, g, b)
 
         raise ValueError(f'Can not multiply by {other}')
 
     def __eq__(self, other):
         if isinstance(other, Color):
-            return (equal(self.red, other.red) and
-                    equal(self.green, other.green) and
-                    equal(self.blue, other.blue))
+            return self.t == other.t
         return False
 
