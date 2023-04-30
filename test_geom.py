@@ -57,3 +57,11 @@ def test_subtracting_point_from_a_vector():
     with pytest.raises(ValueError):
         result = v - p
 
+def test_negating_vector():
+    v = Vector(1, -2, 3)
+
+    result = -v
+
+    assert result.values == (-1, 2, -3, 0)
+
+

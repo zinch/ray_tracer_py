@@ -8,6 +8,9 @@ class Tuple():
     def is_vector(self):
         return self.values[3] == 0
 
+    def __neg__(self):
+         raise ValueError("Cannot negate point")
+
     def __add__(self, other):
         if self.is_point() and other.is_point():
             raise ValueError("Cannot add points")
@@ -41,5 +44,9 @@ class Point(Tuple):
 class Vector(Tuple):
     def __init__(self, x, y, z):
         super().__init__(x, y, z, 0)
+
+    def __neg__(self):
+        x, y, z, _ = self.values
+        return Vector(-x, -y, -z)
 
 
