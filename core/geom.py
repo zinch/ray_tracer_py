@@ -1,7 +1,7 @@
 import math
 from core.math_util import equal
 
-class Tuple():
+class Tuple:
     def __init__(self, x, y, z, w):
         self.values = (x, y, z, w)
 
@@ -48,9 +48,9 @@ class Tuple():
             return Point(x1 - x2, y1 - y2, z1 - z2)
 
     def __eq__(self, other):
-        print('boom')
         if not isinstance(other, Tuple):
             raise ValueError('Can compare only tuples')
+
         x1, y1, z1, w1 = self.values
         x2, y2, z2, w2 = other.values
         return (equal(x1, x2) and
@@ -60,6 +60,9 @@ class Tuple():
 
     def __str__(self):
         return str(self.values)
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Point(Tuple):
