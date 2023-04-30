@@ -44,3 +44,10 @@ def test_magnitude(vector, normalized_vector):
     assert vector.normalize() == normalized_vector
     assert vector.normalize().magnitude() == 1
 
+def test_dot_product():
+    a = Vector(1, 2, 3)
+    b = Vector(2, 3, 4)
+
+    dot_product = a * b
+
+    assert dot_product == 20

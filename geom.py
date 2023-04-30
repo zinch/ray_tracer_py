@@ -12,10 +12,10 @@ class Tuple():
         return self.values[3] == 0
 
     def __neg__(self):
-         raise ValueError('Cannot negate point')
+         raise ValueError('Cannot negate tuple')
 
     def __mul__(self):
-         raise ValueError('Cannot negate point')
+         raise ValueError('Cannot multiply tuple')
 
     def __add__(self, other):
         if not isinstance(other, Tuple):
@@ -76,6 +76,12 @@ class Vector(Tuple):
         if isinstance(other, (int, float)):
             x, y, z, _ = self.values
             return Vector(x * other, y * other, z * other)
+        elif isinstance(other, Vector):
+            x1, y1, z1, _ = self.values
+            x2, y2, z2, _ = other.values
+            return x1 * x2 + y1 * y2 + z1 * z2
+        else:
+            raise ValueError(f'Cannot multiply by {other}')
 
     def magnitude(self):
         x, y, z, _ = self.values
