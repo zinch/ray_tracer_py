@@ -58,6 +58,9 @@ class Tuple():
             equal(z1, z2) and
             equal(w1, w2))
 
+    def __str__(self):
+        return str(self.values)
+
 
 class Point(Tuple):
     def __init__(self, x, y, z):
