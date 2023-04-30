@@ -4,25 +4,13 @@ from geom import *
 from math_util import equal
 
 def test_negating_vector():
-    v = Vector(1, -2, 3)
-
-    result = -v
-
-    assert result.values == (-1, 2, -3, 0)
+    assert -Vector(1, -2, 3) == Vector(-1, 2, -3)
 
 def test_multiplying_vector_by_scalar():
-    v = Vector(1, -2, 3)
-
-    result = v * 3.5
-
-    assert result.values == (3.5, -7, 10.5, 0)
+    assert Vector(1, -2, 3) * 3.5 == Vector(3.5, -7, 10.5)
 
 def test_multiplying_vector_by_fraction():
-    v = Vector(1, -2, 3)
-
-    result = v * 0.5
-
-    assert result.values == (0.5, -1, 1.5, 0)
+    assert Vector(1, -2, 3) * 0.5 == Vector(0.5, -1, 1.5)
 
 @pytest.mark.parametrize('vector, expected_magnitude',
         [
