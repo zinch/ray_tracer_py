@@ -3,10 +3,10 @@ import math
 class Matrix:
     def __init__(self, elements):
         size = len(elements)
-        if size != 16 and size != 9 and size != 4:
-            raise AssertionError('Only 4x4, 3x3 and 2x2 matrices are supported')
         self.elements = elements
         self.dimension = math.ceil(math.sqrt(size))
+        if size != 16 and size != 9 and size != 4:
+            raise AssertionError('Only 4x4, 3x3 and 2x2 matrices are supported')
 
     def __str__(self):
         xs = [x for x in range(0, self.dimension * self.dimension, self.dimension)]

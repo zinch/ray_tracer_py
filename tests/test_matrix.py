@@ -15,8 +15,21 @@ def test_creating_4x4_matrix():
     assert m(3,2) == 15.5
 
 def test_creating_2x2_matrix():
-    m = Matrix((-3, 5, 1, -2))
+    m = Matrix((
+        -3, 5,
+        1, -2))
     assert m(0,0) == -3
     assert m(0,1) == 5
     assert m(1,0) == 1
     assert m(1,1) == -2
+
+def test_creating_3x3_matrix():
+    m = Matrix((
+        -3, 5, 0,
+        1, -2, -7,
+        0, 1, 1))
+    assert m(0,0) == -3
+    assert m(0,1) == 5
+    assert m(1,0) == 1
+    assert m(1,1) == -2
+    assert m(2,2) == 1
