@@ -1,5 +1,5 @@
 from core.geom import Point, Vector
-from core.matrix import Matrix
+from core.matrix import Matrix, IDENTITY_MATRIX
 
 def test_creating_4x4_matrix():
     values = (1, 2, 3, 4,
@@ -80,7 +80,32 @@ def test_multiplication_by_vector():
         2, 4, 4, 2,
         8, 6, 4, 1,
         0, 0, 0, 1))
-    p = Vector(1, 2, 3)
+    v = Vector(1, 2, 3)
 
-    new_point = m * p
-    assert new_point == Vector(18, 24, 33)
+    new_vector = m * v
+    assert new_vector == Vector(14, 22, 32)
+
+def test_multiplying_by_identity_matrix():
+    m = Matrix((
+        0, 1, 2, 4,
+        1, 2, 4, 8,
+        2, 4, 8, 16,
+        4, 8, 16, 32))
+
+    new_matrix = m * IDENTITY_MATRIX
+
+    assert new_matrix == m
+
+def test_multiplying_point_by_identity_matrix():
+    p = Point(1, 2, 3)
+
+    new_point = IDENTITY_MATRIX * p
+
+    assert new_point == p
+
+def test_multiplying_vector_by_identity_matrix():
+    v = Vector(1, 2, 3)
+
+    new_vector = IDENTITY_MATRIX * v
+
+    assert new_vector == v

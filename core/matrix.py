@@ -55,3 +55,20 @@ class Matrix:
             else:
                 return Vector(x, y, z)
 
+class IdentityMatrix(Matrix):
+    def __init__(self):
+        super().__init__((
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1))
+
+    def __mul__(self, other):
+        if not isinstance(other, (Matrix, Point, Vector)) or (
+                self.dimension != 4 and self.dimension != other.dimension):
+            raise ValueError('Can only multiply 4x4 matrices')
+
+        return other
+
+IDENTITY_MATRIX = IdentityMatrix()
+
