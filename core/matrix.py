@@ -1,5 +1,6 @@
 import math
 
+from core.geom import Point, Vector
 from core.math_util import equal
 
 class Matrix:
@@ -29,17 +30,28 @@ class Matrix:
                 for i in range(0, self.dimension * self.dimension)]))
 
     def __mul__(self, other):
-        if not isinstance(other, Matrix) or (
+        if not isinstance(other, (Matrix, Point, Vector)) or (
                 self.dimension != 4 and self.dimension != other.dimension):
             raise ValueError('Can only multiply 4x4 matrices')
 
-        values = []
-        for i in range(0, 4):
-            for j in range(0, 4):
-                c = 0
-                for k in range(0, 4):
-                    c += self(i, k) * other(k, j)
-                values.append(c)
+        if isinstance(other, Matrix):
+            values = []
+            for i in range(0, 4):
+                for j in range(0, 4):
+                    c = 0
+                    for k in range(0, 4):
+                        c += self(i, k) * other(k, j)
+                    values.append(c)
 
-        return Matrix(tuple(values))
+            return Matrix(tuple(values))
+
+        elif isinstance(other, (Point, Vector)):
+            x = sum([self(0, i) * other.t[i] for i in range(0, 4)])
+            y = sum([self(1, i) * other.t[i] for i in range(0, 4)])
+            z = sum([self(2, i) * other.t[i] for i in range(0, 4)])
+
+            if isinstance(other, Point):
+                return Point(x, y, z)
+            else:
+                return Vector(x, y, z)
 

@@ -1,3 +1,4 @@
+from core.geom import Point, Vector
 from core.matrix import Matrix
 
 def test_creating_4x4_matrix():
@@ -61,3 +62,25 @@ def test_matrix_multiplication():
         44, 54, 114, 108,
         40, 58, 110, 102,
         16, 26, 46, 42))
+
+def test_multiplication_by_point():
+    m = Matrix((
+        1, 2, 3, 4,
+        2, 4, 4, 2,
+        8, 6, 4, 1,
+        0, 0, 0, 1))
+    p = Point(1, 2, 3)
+
+    new_point = m * p
+    assert new_point == Point(18, 24, 33)
+
+def test_multiplication_by_vector():
+    m = Matrix((
+        1, 2, 3, 4,
+        2, 4, 4, 2,
+        8, 6, 4, 1,
+        0, 0, 0, 1))
+    p = Vector(1, 2, 3)
+
+    new_point = m * p
+    assert new_point == Vector(18, 24, 33)
