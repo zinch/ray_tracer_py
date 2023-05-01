@@ -62,6 +62,10 @@ class Matrix:
                 result.append(self(j, i))
         return Matrix(tuple(result))
 
+    def determinant(self):
+        if self.dimension == 2:
+            return self.elements[0] * self.elements[3] - self.elements[1] * self.elements[2]
+
 class IdentityMatrix(Matrix):
     def __init__(self):
         super().__init__((

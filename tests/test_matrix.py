@@ -125,3 +125,11 @@ def test_transposing_matrix():
         3, 9, 5, 5,
         0, 8, 3, 8))
 
+def test_calculate_determinant_of_2x2_matrix():
+    m = Matrix((
+        1, 5,
+        -3, 2))
+
+    det = m.determinant()
+
+    assert det == 17
