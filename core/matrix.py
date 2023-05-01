@@ -1,17 +1,19 @@
+import math
+
 class Matrix:
     def __init__(self, elements):
-        if len(elements) != 16:
-            raise AssertionError('Only 4x4 matrices are supported')
+        size = len(elements)
+        if size != 16 and size != 9 and size != 4:
+            raise AssertionError('Only 4x4, 3x3 and 2x2 matrices are supported')
         self.elements = elements
+        self.dimension = math.ceil(math.sqrt(size))
 
     def __str__(self):
-        xs = [f'{self.elements[i:i + 4]}' for i in [0, 4, 8, 12]]
-        return '\n'.join(xs)
+        xs = [x for x in range(0, self.dimension * self.dimension, self.dimension)]
+        return '\n'.join([f'{self.elements[x:x + self.dimension]}' for x in xs])
 
     def __repr__(self):
         return self.__str__()
 
     def __call__(self, x, y):
-        idx = x * 4 + y
-        print(f'{x},{y} - {idx}')
-        return self.elements[idx]
+        return self.elements[x * self.dimension + y]
