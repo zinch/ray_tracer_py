@@ -48,7 +48,7 @@ def to_ppm_format(canvas):
             lines.append(line)
 
     lines = '\n'.join(lines)
-    return f'''
+    return f'''\
 P3
 {canvas.width} {canvas.height}
 255

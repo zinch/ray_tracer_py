@@ -26,7 +26,7 @@ def test_formatting_as_ppm():
     canvas.write_pixel(4, 2, Color(-0.5, 0, 1))
 
     ppm = to_ppm_format(canvas)
-    assert ppm == '''
+    assert ppm == '''\
 P3
 5 3
 255
@@ -42,7 +42,7 @@ def test_splitting_long_ppm_lines():
         for j in range(0, 2):
             canvas.write_pixel(i, j, color)
     ppm = to_ppm_format(canvas)
-    assert ppm == '''
+    assert ppm == '''\
 P3
 10 2
 255
