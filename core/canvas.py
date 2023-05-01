@@ -2,6 +2,8 @@ import math
 
 from core.color import Color
 
+MAX_LINE_LEN = 70
+
 class Canvas:
     def __init__(self, width, height):
         self.width = width
@@ -23,6 +25,12 @@ def to_ppm_format(canvas):
         value = max(0, value)
         return min(math.ceil(value * 255), 255)
 
+    def split_long_line(line):
+        split_idx = line.rfind(' ', 0, MAX_LINE_LEN)
+        short_line = line[:split_idx]
+        rest = line[split_idx + 1:]
+        return (short_line, rest)
+
     lines = []
     for j in range(0, canvas.height):
         colors = []
@@ -31,7 +39,13 @@ def to_ppm_format(canvas):
             txt = f'{scale(p.red())} {scale(p.green())} {scale(p.blue())}'
             colors.insert(i, txt)
 
-        lines.insert(j, ' '.join(colors))
+        line = ' '.join(colors)
+        if len(line) > MAX_LINE_LEN:
+            short_line, rest = split_long_line(line)
+            lines.append(short_line)
+            lines.append(rest)
+        else:
+            lines.append(line)
 
     lines = '\n'.join(lines)
     return f'''
