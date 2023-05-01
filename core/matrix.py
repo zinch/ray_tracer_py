@@ -18,8 +18,8 @@ class Matrix:
     def __repr__(self):
         return self.__str__()
 
-    def __call__(self, x, y):
-        return self.elements[x * self.dimension + y]
+    def __call__(self, i, j):
+        return self.elements[i * self.dimension + j]
 
     def __eq__(self, other):
         if not isinstance(other, Matrix):
@@ -60,6 +60,14 @@ class Matrix:
         for i in range(0, self.dimension):
             for j in range(0, self.dimension):
                 result.append(self(j, i))
+        return Matrix(tuple(result))
+
+    def submatrix(self, skip_i, skip_j):
+        result = []
+        for i in range(0, self.dimension):
+            for j in range(0, self.dimension):
+                if not (i == skip_i or j == skip_j):
+                    result.append(self(i, j))
         return Matrix(tuple(result))
 
     def determinant(self):

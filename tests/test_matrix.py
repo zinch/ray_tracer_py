@@ -133,3 +133,30 @@ def test_calculate_determinant_of_2x2_matrix():
     det = m.determinant()
 
     assert det == 17
+
+def test_find_submatrix_of_3x3_matrix():
+    m = Matrix((
+        1, 5, 0,
+        -3, 2, 7,
+        0, 6, -3))
+
+    submatrix = m.submatrix(0, 2)
+
+    assert submatrix == Matrix((
+        -3, 2,
+        0, 6))
+
+def test_find_submatrix_of_4x4_matrix():
+    m = Matrix((
+        -6, 1, 1, 6,
+        -8, 5, 8, 6,
+        -1, 0, 8, 2,
+        -7, 1, -1, 1))
+
+    submatrix = m.submatrix(2, 1)
+
+    assert submatrix == Matrix((
+        -6, 1, 6,
+        -8, 8, 6,
+        -7, -1, 1))
+
