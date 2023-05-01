@@ -21,9 +21,25 @@ class Matrix:
         return self.elements[x * self.dimension + y]
 
     def __eq__(self, other):
-        if isinstance(other, Matrix):
-            return (self.dimension == other.dimension and
-                all([equal(self.elements[i], other.elements[i])
-                    for i in range(0, self.dimension * self.dimension)]))
-        else:
+        if not isinstance(other, Matrix):
             return False
+
+        return (self.dimension == other.dimension and
+            all([equal(self.elements[i], other.elements[i])
+                for i in range(0, self.dimension * self.dimension)]))
+
+    def __mul__(self, other):
+        if not isinstance(other, Matrix) or (
+                self.dimension != 4 and self.dimension != other.dimension):
+            raise ValueError('Can only multiply 4x4 matrices')
+
+        values = []
+        for i in range(0, 4):
+            for j in range(0, 4):
+                c = 0
+                for k in range(0, 4):
+                    c += self(i, k) * other(k, j)
+                values.append(c)
+
+        return Matrix(tuple(values))
+
