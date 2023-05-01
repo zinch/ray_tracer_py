@@ -55,6 +55,13 @@ class Matrix:
             else:
                 return Vector(x, y, z)
 
+    def transpose(self):
+        result = []
+        for i in range(0, self.dimension):
+            for j in range(0, self.dimension):
+                result.append(self(j, i))
+        return Matrix(tuple(result))
+
 class IdentityMatrix(Matrix):
     def __init__(self):
         super().__init__((
@@ -69,6 +76,9 @@ class IdentityMatrix(Matrix):
             raise ValueError('Can only multiply 4x4 matrices')
 
         return other
+
+    def transpose(self):
+        return self
 
 IDENTITY_MATRIX = IdentityMatrix()
 
