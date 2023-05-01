@@ -160,3 +160,13 @@ def test_find_submatrix_of_4x4_matrix():
         -8, 8, 6,
         -7, -1, 1))
 
+def test_calculating_minor_of_3x3_matrix():
+    m = Matrix((
+        3, 5, 0,
+        2, -1, -7,
+        6, -1, 5))
+
+    submatrix = m.submatrix(1, 0)
+
+    assert submatrix.determinant() == 25
+    assert m.minor(1, 0) == 25

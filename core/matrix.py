@@ -74,6 +74,9 @@ class Matrix:
         if self.dimension == 2:
             return self.elements[0] * self.elements[3] - self.elements[1] * self.elements[2]
 
+    def minor(self, i, j):
+        return self.submatrix(i, j).determinant()
+
 class IdentityMatrix(Matrix):
     def __init__(self):
         super().__init__((
