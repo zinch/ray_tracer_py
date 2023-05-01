@@ -36,8 +36,7 @@ def to_ppm_format(canvas):
         colors = []
         for i in range(0, canvas.width):
             p = canvas.pixel_at(i, j)
-            txt = f'{scale(p.red())} {scale(p.green())} {scale(p.blue())}'
-            colors.insert(i, txt)
+            colors.append(f'{scale(p.red())} {scale(p.green())} {scale(p.blue())}')
 
         line = ' '.join(colors)
         if len(line) > MAX_LINE_LEN:

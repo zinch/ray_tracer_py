@@ -1,5 +1,7 @@
 import math
 
+from core.math_util import equal
+
 class Matrix:
     def __init__(self, elements):
         size = len(elements)
@@ -17,3 +19,11 @@ class Matrix:
 
     def __call__(self, x, y):
         return self.elements[x * self.dimension + y]
+
+    def __eq__(self, other):
+        if isinstance(other, Matrix):
+            return (self.dimension == other.dimension and
+                all([equal(self.elements[i], other.elements[i])
+                    for i in range(0, self.dimension * self.dimension)]))
+        else:
+            return False
