@@ -77,6 +77,13 @@ class Matrix:
     def minor(self, i, j):
         return self.submatrix(i, j).determinant()
 
+    def cofactor(self, i, j):
+        m = self.minor(i, j)
+        if i + j % 2 == 0:
+            return m
+        else:
+            return -m
+
 class IdentityMatrix(Matrix):
     def __init__(self):
         super().__init__((

@@ -170,3 +170,12 @@ def test_calculating_minor_of_3x3_matrix():
 
     assert submatrix.determinant() == 25
     assert m.minor(1, 0) == 25
+
+def test_calculating_cofactor_of_3x3_matrix():
+    m = Matrix((
+        3, 5, 0,
+        2, -1, -7,
+        6, -1, 5))
+
+    assert m.minor(0, 0) == -12
+    assert m.cofactor(0, 0) == -12
