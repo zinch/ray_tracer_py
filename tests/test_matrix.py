@@ -179,3 +179,27 @@ def test_calculating_cofactor_of_3x3_matrix():
 
     assert m.minor(0, 0) == -12
     assert m.cofactor(0, 0) == -12
+
+def test_calculate_determinant_of_3x3_matrix():
+    m = Matrix((
+        1, 2, 6,
+        -5, 8, -4,
+        2, 6, 4))
+
+    assert m.cofactor(0, 0) == 56
+    assert m.cofactor(0, 1) == 12
+    assert m.cofactor(0, 2) == -46
+    assert m.determinant() == -196
+
+def test_calculate_determinant_of_4x4_matrix():
+    m = Matrix((
+        -2, -8, 3, 5,
+        -3, 1, 7, 3,
+        1, 2, -9, 6,
+        -6, 7, 7, -9))
+
+    assert m.cofactor(0, 0) == 690
+    assert m.cofactor(0, 1) == 447
+    assert m.cofactor(0, 2) == 210
+    assert m.cofactor(0, 3) == 51
+    assert m.determinant() == -4071

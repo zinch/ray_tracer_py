@@ -74,6 +74,8 @@ class Matrix:
         if self.dimension == 2:
             return self.elements[0] * self.elements[3] - self.elements[1] * self.elements[2]
 
+        return sum([self.cofactor(0, i) * self.elements[i] for i in range(0, self.dimension)])
+
     def minor(self, i, j):
         return self.submatrix(i, j).determinant()
 
