@@ -81,13 +81,26 @@ class Matrix:
 
     def cofactor(self, i, j):
         m = self.minor(i, j)
-        if i + j % 2 == 0:
+        if (i + j) % 2 == 0:
             return m
-        else:
-            return -m
+        return -m
 
     def is_invertible(self):
         return not equal(self.determinant(), 0)
+
+    def inverse(self):
+        det = self.determinant()
+        if equal(det, 0):
+            raise ValueError(f'Matrix {self} is not invertible')
+
+        cofactor_matrix = Matrix(tuple([
+            self.cofactor(j, i) / det
+                for i in range(0, self.dimension)
+                for j in range(0, self.dimension)]))
+
+        print(f'CoM: {cofactor_matrix}')
+        return cofactor_matrix
+
 
 class IdentityMatrix(Matrix):
     def __init__(self):
@@ -105,6 +118,9 @@ class IdentityMatrix(Matrix):
         return other
 
     def transpose(self):
+        return self
+
+    def inverse(self):
         return self
 
 IDENTITY_MATRIX = IdentityMatrix()
