@@ -86,6 +86,9 @@ class Matrix:
         else:
             return -m
 
+    def is_invertible(self):
+        return not equal(self.determinant(), 0)
+
 class IdentityMatrix(Matrix):
     def __init__(self):
         super().__init__((

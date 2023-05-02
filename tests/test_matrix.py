@@ -203,3 +203,23 @@ def test_calculate_determinant_of_4x4_matrix():
     assert m.cofactor(0, 2) == 210
     assert m.cofactor(0, 3) == 51
     assert m.determinant() == -4071
+
+def test_invertable_matrix_for_invertability():
+    m = Matrix((
+        6, 4, 4, 4,
+        5, 5, 7, 6,
+        4, -9, 3, -7,
+        9, 1, 7, -6))
+
+    assert m.determinant() == -2120
+    assert m.is_invertible()
+
+def test_noninvertable_matrix_for_invertability():
+    m = Matrix((
+        -4, 2, -2, -3,
+        9, 6, 2, 6,
+        0, -5, 1, -5,
+        0, 0, 0, 0))
+
+    assert m.determinant() == 0
+    assert not m.is_invertible()
