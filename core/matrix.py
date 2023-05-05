@@ -132,3 +132,10 @@ def translation(x=0, y=0, z=0):
         0, 0, 1, z,
         0, 0, 0, 1))
 
+def scaling(x=1, y=1, z=1):
+    return Matrix((
+        x, 0, 0, 0,
+        0, y, 0, 0,
+        0, 0, z, 0,
+        0, 0, 0, 1))
+
