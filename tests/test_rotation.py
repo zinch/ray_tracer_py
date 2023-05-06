@@ -1,5 +1,5 @@
 from core.geom import Point
-from core.matrix import rotation_x, rotation_y, rotation_z
+from core.matrix import rotation_x, rotation_y, rotation_z, shearing
 
 import math
 
@@ -44,4 +44,52 @@ def test_rotating_around_z_axis():
 
     assert half_quarter_pt == Point(-math.sqrt(2)/2, math.sqrt(2)/2, 0)
     assert full_quarter_pt == Point(-1, 0, 0)
+
+def test_shearing_transformation_of_x_in_proportion_to_y():
+    transform = shearing(1, 0, 0, 0, 0, 0)
+    p = Point(2, 3, 4)
+
+    new_point = transform * p
+
+    assert new_point == Point(5, 3, 4)
+
+def test_shearing_transformation_of_x_in_proportion_to_z():
+    transform = shearing(0, 1, 0, 0, 0, 0)
+    p = Point(2, 3, 4)
+
+    new_point = transform * p
+
+    assert new_point == Point(6, 3, 4)
+
+def test_shearing_transformation_of_y_in_proportion_to_x():
+    transform = shearing(0, 0, 1, 0, 0, 0)
+    p = Point(2, 3, 4)
+
+    new_point = transform * p
+
+    assert new_point == Point(2, 5, 4)
+
+def test_shearing_transformation_of_y_in_proportion_to_z():
+    transform = shearing(0, 0, 0, 1, 0, 0)
+    p = Point(2, 3, 4)
+
+    new_point = transform * p
+
+    assert new_point == Point(2, 7, 4)
+
+def test_shearing_transformation_of_z_in_proportion_to_x():
+    transform = shearing(0, 0, 0, 0, 1, 0)
+    p = Point(2, 3, 4)
+
+    new_point = transform * p
+
+    assert new_point == Point(2, 3, 6)
+
+def test_shearing_transformation_of_z_in_proportion_to_y():
+    transform = shearing(0, 0, 0, 0, 0, 1)
+    p = Point(2, 3, 4)
+
+    new_point = transform * p
+
+    assert new_point == Point(2, 3, 7)
 
