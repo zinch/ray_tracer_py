@@ -139,3 +139,9 @@ def scaling(x=1, y=1, z=1):
         0, 0, z, 0,
         0, 0, 0, 1))
 
+def rotation_x(rad):
+    return Matrix((
+        1, 0, 0, 0,
+        0, math.cos(rad), -math.sin(rad), 0,
+        0, math.sin(rad), math.cos(rad), 0,
+        0, 0, 0, 1))
