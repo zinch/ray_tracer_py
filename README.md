@@ -6,9 +6,9 @@ All tests are in `tests` directory. To execute them run
 ## Projectile
 To draw trajectory of a projectile and test rendering to canvas run
 
-  python3 projectile.py
+  ./run projectile
 
 ## Clock
 To draw an analog clock dial and test transformations
 
-  python3 clock.py
+  ./run clock

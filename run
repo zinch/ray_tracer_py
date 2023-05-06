@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+
+import argparse
+
+parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument('script', help='''Program to be executed:
+    * projectile    prints projectile trajectory
+    * clock         prints analog clock display
+''')
+args = parser.parse_args()
+
+script = args.script
+with open(f'bin/{script}.py', 'r') as f:
+    exec(f.read())
