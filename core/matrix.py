@@ -145,3 +145,10 @@ def rotation_x(rad):
         0, math.cos(rad), -math.sin(rad), 0,
         0, math.sin(rad), math.cos(rad), 0,
         0, 0, 0, 1))
+
+def rotation_y(rad):
+    return Matrix((
+        math.cos(rad), 0, math.sin(rad), 0,
+        0, 1, 0, 0,
+        -math.sin(rad), 0, math.cos(rad), 0,
+        0, 0, 0, 1))
