@@ -1,5 +1,5 @@
 from core.geom import Point
-from core.matrix import rotation_x, rotation_y, rotation_z, shearing
+from core.matrix import rotation_x, rotation_y, rotation_z, scaling, shearing, translation
 
 import math
 
@@ -93,3 +93,21 @@ def test_shearing_transformation_of_z_in_proportion_to_y():
 
     assert new_point == Point(2, 3, 7)
 
+def test_sequence_of_transformations():
+    p = Point(1, 0, 1)
+    A = rotation_x(math.pi / 2)
+    B = scaling(5, 5, 5)
+    C = translation(10, 5, 7)
+
+    rotated_pt = A * p
+    assert rotated_pt == Point(1, -1, 0)
+
+    scaled_pt = B * rotated_pt
+    assert scaled_pt == Point(5, -5, 0)
+
+    translated_pt = C * scaled_pt
+    assert translated_pt == Point(15, 0, 7)
+
+    T = C * B * A
+    new_point = T * p
+    assert new_point == Point(15, 0, 7)
