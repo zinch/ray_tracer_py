@@ -31,7 +31,6 @@ for i in range(12):
     x = round(new_point.x())
     y = round(new_point.y())
 
-    print(f'i={i}, angle={round(rotation_angle / math.pi * 180)}, x={x}, y={y}')
     canvas.write_pixel(x, y, color)
 
 with open('output/clock.ppm', 'w') as f:
