@@ -53,3 +53,12 @@ class Tuple:
     def __neg__(self):
         x, y, z, w = self
         return Tuple(-x, -y, -z, -w)
+
+    def x(self):
+        return self[0]
+
+    def y(self):
+        return self[1]
+
+    def z(self):
+        return self[2]

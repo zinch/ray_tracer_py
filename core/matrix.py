@@ -101,6 +101,23 @@ class Matrix:
         print(f'CoM: {cofactor_matrix}')
         return cofactor_matrix
 
+    def rotate_x(self, rad):
+        return rotation_x(rad) * self
+
+    def rotate_y(self, rad):
+        return rotation_y(rad) * self
+
+    def rotate_z(self, rad):
+        return rotation_z(rad) * self
+
+    def scale(self, x, y, z):
+        return scaling(x, y, z) * self
+
+    def translate(self, x, y, z):
+        return translation(x, y, z) * self
+
+    def shear(self, xy, xz, yx, yz, zx, zy):
+        return shearing(xy, xz, yx, yz, zx, zy) * self
 
 class IdentityMatrix(Matrix):
     def __init__(self):

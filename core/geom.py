@@ -50,6 +50,15 @@ class Base:
         else:
             return Point(x, y, z)
 
+    def x(self):
+        return self.t.x()
+
+    def y(self):
+        return self.t.y()
+
+    def z(self):
+        return self.t.z()
+
 
 class Point(Base):
     def __init__(self, x, y, z):

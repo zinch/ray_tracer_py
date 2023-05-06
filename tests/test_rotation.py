@@ -1,5 +1,6 @@
 from core.geom import Point
-from core.matrix import rotation_x, rotation_y, rotation_z, scaling, shearing, translation
+from core.matrix import (rotation_x, rotation_y, rotation_z,
+        scaling, shearing, translation, IDENTITY_MATRIX)
 
 import math
 
@@ -109,5 +110,12 @@ def test_sequence_of_transformations():
     assert translated_pt == Point(15, 0, 7)
 
     T = C * B * A
+    new_point = T * p
+    assert new_point == Point(15, 0, 7)
+
+    T = (IDENTITY_MATRIX
+            .rotate_x(math.pi / 2)
+            .scale(5, 5, 5)
+            .translate(10, 5, 7))
     new_point = T * p
     assert new_point == Point(15, 0, 7)

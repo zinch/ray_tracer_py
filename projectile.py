@@ -8,10 +8,10 @@ class Projectile:
         self.velocity = velocity
 
     def x(self):
-        return self.position.t[0]
+        return self.position.x()
 
     def y(self):
-        return self.position.t[1]
+        return self.position.y()
 
 def tick(env, proj):
     position = proj.position + proj.velocity
