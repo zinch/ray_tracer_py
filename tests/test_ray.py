@@ -1,4 +1,5 @@
 from core.geom import Point, Vector
+from core.objects import Sphere
 from core.ray import Ray
 
 def test_creating_ray():
@@ -24,3 +25,52 @@ def test_computing_point_from_distance():
 
     p = r.position(2.5)
     assert p == Point(4.5, 3, 4)
+
+def test_intersecting_sphere_at_two_points():
+    r = Ray(Point(0, 0, -5), Vector(0, 0, 1))
+    s = Sphere()
+
+    intersections = r.intersect(s)
+
+    assert len(intersections) == 2
+    assert intersections[0] == 4.0
+    assert intersections[1] == 6.0
+
+def test_intersecting_sphere_at_tangent():
+    r = Ray(Point(0, 1, -5), Vector(0, 0, 1))
+    s = Sphere()
+
+    intersections = r.intersect(s)
+
+    assert len(intersections) == 2
+    assert intersections[0] == 5.0
+    assert intersections[1] == 5.0
+
+def test_missing_a_sphere():
+    r = Ray(Point(0, 2, -5), Vector(0, 0, 1))
+    s = Sphere()
+
+    intersections = r.intersect(s)
+
+    assert len(intersections) == 0
+
+def test_intersecting_sphere_from_inside():
+    r = Ray(Point(0, 0, 0), Vector(0, 0, 1))
+    s = Sphere()
+
+    intersections = r.intersect(s)
+
+    assert len(intersections) == 2
+    assert intersections[0] == -1.0
+    assert intersections[1] == 1.0
+
+def test_intersecting_sphere_behind_ray():
+    r = Ray(Point(0, 0, 5), Vector(0, 0, 1))
+    s = Sphere()
+
+    intersections = r.intersect(s)
+
+    assert len(intersections) == 2
+    assert intersections[0] == -6.0
+    assert intersections[1] == -4.0
+
