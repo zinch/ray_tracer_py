@@ -28,4 +28,4 @@ class Ray:
         t1 = (-b - math.sqrt(discriminant)) / (2 * a)
         t2 = (-b + math.sqrt(discriminant)) / (2 * a)
 
-        return [t1, t2]
+        return [(t1, obj), (t2, obj)]

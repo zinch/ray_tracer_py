@@ -33,8 +33,13 @@ def test_intersecting_sphere_at_two_points():
     intersections = r.intersect(s)
 
     assert len(intersections) == 2
-    assert intersections[0] == 4.0
-    assert intersections[1] == 6.0
+    (t1, obj) = intersections[0]
+    assert t1 == 4.0
+    assert obj == s
+
+    (t2, obj) = intersections[1]
+    assert t2 == 6.0
+    assert obj == s
 
 def test_intersecting_sphere_at_tangent():
     r = Ray(Point(0, 1, -5), Vector(0, 0, 1))
@@ -43,8 +48,8 @@ def test_intersecting_sphere_at_tangent():
     intersections = r.intersect(s)
 
     assert len(intersections) == 2
-    assert intersections[0] == 5.0
-    assert intersections[1] == 5.0
+    assert intersections[0][0] == 5.0
+    assert intersections[1][0] == 5.0
 
 def test_missing_a_sphere():
     r = Ray(Point(0, 2, -5), Vector(0, 0, 1))
@@ -61,8 +66,8 @@ def test_intersecting_sphere_from_inside():
     intersections = r.intersect(s)
 
     assert len(intersections) == 2
-    assert intersections[0] == -1.0
-    assert intersections[1] == 1.0
+    assert intersections[0][0] == -1.0
+    assert intersections[1][0] == 1.0
 
 def test_intersecting_sphere_behind_ray():
     r = Ray(Point(0, 0, 5), Vector(0, 0, 1))
@@ -71,6 +76,7 @@ def test_intersecting_sphere_behind_ray():
     intersections = r.intersect(s)
 
     assert len(intersections) == 2
-    assert intersections[0] == -6.0
-    assert intersections[1] == -4.0
+    assert intersections[0][0] == -6.0
+    assert intersections[1][0] == -4.0
+
 
