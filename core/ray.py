@@ -18,6 +18,7 @@ class Intersections:
         positive_intersections.sort(key=lambda i: i[0])
         return positive_intersections[0]
 
+
 class Ray:
     def __init__(self, origin, direction):
         self.origin = origin
@@ -44,3 +45,9 @@ class Ray:
         t2 = (-b + math.sqrt(discriminant)) / (2 * a)
 
         return Intersections([(t1, obj), (t2, obj)])
+
+    def transform(self, matrix):
+        new_origin = matrix * self.origin
+        new_direction = matrix * self.direction
+
+        return Ray(new_origin, new_direction)

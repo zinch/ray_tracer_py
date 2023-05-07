@@ -1,4 +1,5 @@
 from core.geom import Point, Vector
+from core.matrix import scaling, translation
 from core.objects import Sphere
 from core.ray import Intersections, Ray
 
@@ -115,3 +116,20 @@ def test_hit_is_lowest_positive_intersection():
 
     assert hit == (2, s)
 
+def test_translating_ray():
+    r = Ray(Point(1, 2, 3), Vector(0, 1, 0))
+    m = translation(3, 4, 5)
+
+    new_ray = r.transform(m)
+
+    assert new_ray.origin == Point(4, 6, 8)
+    assert new_ray.direction == Vector(0, 1, 0)
+
+def test_scaling_ray():
+    r = Ray(Point(1, 2, 3), Vector(0, 1, 0))
+    m = scaling(2, 3, 4)
+
+    new_ray = r.transform(m)
+
+    assert new_ray.origin == Point(2, 6, 12)
+    assert new_ray.direction == Vector(0, 3, 0)
