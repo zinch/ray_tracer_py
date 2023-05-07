@@ -3,6 +3,14 @@ from core.objects import Sphere
 
 import math
 
+class Intersections:
+    def __init__(self, intersections):
+        self.intersections = intersections[:]
+        self.count = len(self.intersections)
+
+    def __getitem__(self, key):
+        return self.intersections[key]
+
 class Ray:
     def __init__(self, origin, direction):
         self.origin = origin
@@ -13,7 +21,7 @@ class Ray:
 
     def intersect(self, obj):
         if not isinstance(obj, Sphere):
-            return []
+            return Intersections([])
 
         sphere_to_ray = self.origin - Point(0, 0, 0)
         a = self.direction * self.direction
@@ -23,9 +31,9 @@ class Ray:
         discriminant = b ** 2 - 4 * a * c
 
         if discriminant < 0:
-            return []
+            return Intersections([])
 
         t1 = (-b - math.sqrt(discriminant)) / (2 * a)
         t2 = (-b + math.sqrt(discriminant)) / (2 * a)
 
-        return [(t1, obj), (t2, obj)]
+        return Intersections([(t1, obj), (t2, obj)])
