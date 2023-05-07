@@ -11,6 +11,13 @@ class Intersections:
     def __getitem__(self, key):
         return self.intersections[key]
 
+    def find_hit(self):
+        positive_intersections = [i for i in self.intersections if i[0] >= 0]
+        if len(positive_intersections) == 0:
+            return None
+        positive_intersections.sort(key=lambda i: i[0])
+        return positive_intersections[0]
+
 class Ray:
     def __init__(self, origin, direction):
         self.origin = origin
