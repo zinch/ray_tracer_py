@@ -133,3 +133,22 @@ def test_scaling_ray():
 
     assert new_ray.origin == Point(2, 6, 12)
     assert new_ray.direction == Vector(0, 3, 0)
+
+def test_intersecting_scaled_sphere_with_ray(s):
+    r = Ray(Point(0, 0, -5), Vector(0, 0, 1))
+    s.set_transform(scaling(2, 2, 2))
+
+    intersections = r.intersect(s)
+
+    assert intersections.count == 2
+    assert intersections[0][0] == 3
+    assert intersections[1][0] == 7
+
+def test_intersecting_translated_sphere_with_ray(s):
+    r = Ray(Point(0, 0, -5), Vector(0, 0, 1))
+    s.set_transform(translation(5, 0, 0))
+
+    intersections = r.intersect(s)
+
+    assert intersections.count == 0
+

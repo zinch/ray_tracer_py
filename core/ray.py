@@ -31,9 +31,11 @@ class Ray:
         if not isinstance(obj, Sphere):
             return Intersections([])
 
-        sphere_to_ray = self.origin - Point(0, 0, 0)
-        a = self.direction * self.direction
-        b = 2 * (self.direction * sphere_to_ray)
+        ray = self.transform(obj.transform.inverse())
+
+        sphere_to_ray = ray.origin - Point(0, 0, 0)
+        a = ray.direction * ray.direction
+        b = 2 * (ray.direction * sphere_to_ray)
         c = sphere_to_ray * sphere_to_ray - 1
 
         discriminant = b ** 2 - 4 * a * c
