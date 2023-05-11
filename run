@@ -6,6 +6,7 @@ parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument('script', help='''Program to be executed:
     * projectile    prints projectile trajectory
     * clock         prints analog clock display
+    * circle        prints projection of a sphere on a canvas
 ''')
 args = parser.parse_args()
 

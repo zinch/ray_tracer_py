@@ -98,7 +98,6 @@ class Matrix:
                 for i in range(0, self.dimension)
                 for j in range(0, self.dimension)]))
 
-        print(f'CoM: {cofactor_matrix}')
         return cofactor_matrix
 
     def rotate_x(self, rad):
